@@ -1,0 +1,24 @@
+$kind: http-request
+url: "{{baseUrl}}/api/paiements"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "montant": 500.0,
+      "datePaiement": "2026-10-30",
+      "modePaiement": "CARTE",
+      "contrat": {
+        "idContrat": {{idContrat}},
+        "valide": true
+      }
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Code HTTP attendu [201]', function () { pm.expect(pm.response.code).to.be.oneOf([201]); });
+      pm.collectionVariables.set('idPaiement', pm.response.json().idPaiement);
+    language: text/javascript
+order: 9000

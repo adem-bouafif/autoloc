@@ -1,0 +1,24 @@
+$kind: http-request
+url: "{{baseUrl}}/api/employes"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "nom": "Trabelsi",
+      "prenom": "Ines",
+      "email": "ines@mail.com",
+      "role": "AGENT",
+      "agence": {
+        "idAgence": {{idAgence}}
+      }
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Code HTTP attendu [201]', function () { pm.expect(pm.response.code).to.be.oneOf([201]); });
+      pm.collectionVariables.set('idEmploye', pm.response.json().idEmploye);
+    language: text/javascript
+order: 3000

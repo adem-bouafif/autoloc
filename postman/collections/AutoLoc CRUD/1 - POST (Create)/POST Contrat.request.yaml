@@ -1,0 +1,23 @@
+$kind: http-request
+url: "{{baseUrl}}/api/contrats"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "dateSignature": "2026-10-30",
+      "valide": true,
+      "montantTotal": 500.0,
+      "reservation": {
+        "idReservation": {{idReservation}}
+      }
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Code HTTP attendu [201]', function () { pm.expect(pm.response.code).to.be.oneOf([201]); });
+      pm.collectionVariables.set('idContrat', pm.response.json().idContrat);
+    language: text/javascript
+order: 8000

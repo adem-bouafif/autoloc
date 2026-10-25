@@ -1,0 +1,26 @@
+$kind: http-request
+url: "{{baseUrl}}/api/vehicules"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "categorie": "CITADINE",
+      "modele": "Clio",
+      "tarifJournalier": 80.0,
+      "immatriculation": "TUN-{{$timestamp}}",
+      "marque": "Renault",
+      "statut": "DISPONIBLE",
+      "agence": {
+        "idAgence": {{idAgence}}
+      }
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('Code HTTP attendu [201]', function () { pm.expect(pm.response.code).to.be.oneOf([201]); });
+      pm.collectionVariables.set('idVehicule', pm.response.json().idVehicule);
+    language: text/javascript
+order: 5000

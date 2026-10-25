@@ -1,0 +1,19 @@
+$kind: http-request
+name: http://localhost:8081/api/vehicules
+description: ""
+url: http://localhost:8081/api/vehicules
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"categorie\": \"ECONOMIQUE\",\r
+
+    \  \"immatriculation\": \"123 TUN 4567\",\r
+
+    \  \"marque\": \"Renault\",\r
+
+    \  \"agence\": { \"idAgence\": 1 }\r
+
+    }"
+order: 1000

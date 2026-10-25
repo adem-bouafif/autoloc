@@ -1,0 +1,20 @@
+$kind: http-request
+url: "{{baseUrl}}/api/clients/{{idClient}}"
+method: PUT
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "nom": "Ben Ali",
+      "prenom": "Sami",
+      "email": "sami.modif@mail.com",
+      "telephone": "20123456",
+      "adresse": "Sfax"
+    }
+scripts:
+  - type: afterResponse
+    code: pm.test('Code HTTP attendu [200]', function () { pm.expect(pm.response.code).to.be.oneOf([200]); });
+    language: text/javascript
+order: 2000

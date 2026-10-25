@@ -1,0 +1,13 @@
+$kind: collection
+description: ""
+variables:
+  baseUrl: http://localhost:8081
+  idAgence: "1"
+  idClient: "1"
+  idEmploye: "1"
+  idEquipement: "1"
+  idVehicule: "1"
+  idMaintenance: "1"
+  idReservation: "1"
+  idContrat: "1"
+  idPaiement: "1"
